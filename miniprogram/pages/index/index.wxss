@@ -1,0 +1,110 @@
+/* 基础布局 */
+.container {
+  position: relative;
+  height: 100vh;
+}
+
+/* 地图（全屏） */
+map {
+  width: 100%;
+  height: 100%;
+}
+
+/* 筛选按钮（右上角） */
+.filter-btn {
+  position: absolute;
+  top: 40rpx;
+  right: 40rpx;
+  padding: 12rpx 28rpx;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  color: #2d8cfe;
+  z-index: 10;
+}
+
+/* 筛选浮层（popup） */
+.filter-popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 20;
+  padding: 40rpx;
+  box-sizing: border-box;
+}
+
+.filter-title {
+  font-size: 32rpx;
+  color: #fff;
+  margin-bottom: 20rpx;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.tag-item {
+  padding: 12rpx 24rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50rpx;
+  font-size: 26rpx;
+  color: #fff;
+}
+
+.tag-item.selected {
+  background: #2d8cfe;
+}
+
+.age-group {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.age-item {
+  padding: 12rpx 24rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  color: #fff;
+}
+
+.age-item.active {
+  background: #2d8cfe;
+}
+
+.close-btn {
+  position: absolute;
+  bottom: 40rpx;
+  right: 40rpx;
+  padding: 12rpx 32rpx;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 刷新按钮（右下角） */
+.refresh-btn {
+  position: absolute;
+  bottom: 40rpx;
+  right: 40rpx;
+  width: 96rpx;
+  height: 96rpx;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.refresh-btn image {
+  width: 40rpx;
+  height: 40rpx;
+}

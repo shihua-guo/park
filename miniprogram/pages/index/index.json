@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "Baby Park",
+  "usingComponents": {
+    "cloud-tip-modal": "/components/cloudTipModal/index"
+  }
+}

@@ -1,0 +1,62 @@
+/* pages/detail/detail.wxss */
+.container {
+    padding: 20rpx;
+    background-color: #f8f9fa;
+  }
+  
+  .header {
+    text-align: center;
+    padding: 40rpx 0;
+    position: relative;
+  }
+  
+  .title {
+    font-size: 44rpx;
+    font-weight: bold;
+    color: #2d8cfe;
+    margin-bottom: 20rpx;
+  }
+  
+  .baby-icon {
+    width: 80rpx;
+    height: 80rpx;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  
+  .info-item {
+    background: white;
+    border-radius: 16rpx;
+    padding: 24rpx;
+    margin-bottom: 20rpx;
+    box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+  }
+  
+  .label {
+    color: #666;
+    font-size: 28rpx;
+    margin-right: 10rpx;
+  }
+  
+  .value {
+    color: #333;
+    font-size: 32rpx;
+    font-weight: 500;
+  }
+  
+  .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 20rpx;
+  }
+  
+  .back-btn {
+    background: #2d8cfe;
+    color: white;
+    border-radius: 50rpx;
+    font-size: 32rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+  }

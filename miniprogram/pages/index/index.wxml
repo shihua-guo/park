@@ -1,0 +1,66 @@
+<!-- pages/index/index.wxml -->
+<map 
+  id="myMap"
+  longitude="{{longitude}}"
+  latitude="{{latitude}}"
+  scale="{{scale}}"
+  show-location
+  markers="{{markers}}"
+  bindmarkertap="onMarkerTap"
+  style="width: 100vw; height: 100vh;"
+  enable-3D="{{true}}"
+  enable-overlooking="{{true}}"
+  enable-zoom="{{true}}"
+  enable-scroll="{{true}}"
+  enable-rotate="{{true}}"
+  show-compass="{{true}}"
+  show-scale="{{true}}"
+></map>
+
+<!-- 筛选按钮（右上角） -->
+<view class="filter-btn" bindtap="toggleFilter">
+  <text>筛选</text>
+</view>
+
+<!-- 筛选浮层（popup） -->
+<view class="filter-popup" wx:if="{{isFilterVisible}}">
+  <!-- 场景标签（可多选） -->
+  <view class="filter-section">
+    <text class="filter-title">场景标签</text>
+    <view class="tag-list">
+      <view 
+        wx:for="{{sceneTags}}" 
+        wx:key="id"
+        class="tag-item {{selectedTags.includes(item.id) ? 'selected' : ''}}"
+        bindtap="toggleTag"
+        data-id="{{item.id}}"
+      >
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 适龄段（单选） -->
+  <view class="filter-section">
+    <text class="filter-title">适龄段</text>
+    <view class="age-group">
+      <view 
+        wx:for="{{ageGroups}}" 
+        wx:key="id"
+        class="age-item {{selectedAge === item.id ? 'active' : ''}}"
+        bindtap="selectAge"
+        data-id="{{item.id}}"
+      >
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 关闭按钮 -->
+  <view class="close-btn" bindtap="closeFilter">关闭</view>
+</view>
+
+<!-- 刷新按钮（右下角） -->
+<view class="refresh-btn" bindtap="refreshMap">
+  <image src="/images/refresh-icon.png" mode="aspectFit"></image>
+</view>
