@@ -1,45 +1,84 @@
 // pages/detail/detail.js
 Page({
   data: {
-    park: {}
+    park: {},
+    loading: true
   },
 
   onLoad(options) {
-    // 从URL参数获取公园名称
-    const parkName = options.name;
-    
-    // 本地硬编码数据（MVP版，直接复制到你的项目）
-    const parks = [
-      {
-        name: "深圳湾公园儿童乐园",
-        suitableAge: "3-6岁",
-        facilities: "滑梯/草坪/洗手间",
-        address: "深圳湾公园东门"
-      },
-      {
-        name: "莲花山公园亲子区",
-        suitableAge: "2-8岁",
-        facilities: "树屋/小火车/草坪",
-        address: "莲花山公园北门"
-      },
-      {
-        name: "深圳人才公园",
-        suitableAge: "3-8岁",
-        facilities: "儿童乐园/草坪",
-        address: "深圳人才公园南门"
-      }
-    ];
+    // 从URL参数获取公园ID
+    const parkId = options.id;
 
-    // 根据名称匹配公园
-    const park = parks.find(p => p.name === parkName);
-    if (park) {
-      this.setData({ park });
-    } else {
-      wx.showToast({ title: "公园信息未找到", icon: "none" });
+    if (!parkId) {
+      wx.showToast({ title: '参数错误', icon: 'none' });
       setTimeout(() => wx.navigateBack(), 1500);
+      return;
+    }
+
+    this.loadParkDetail(parkId);
+  },
+
+  // 从云数据库加载公园详情
+  async loadParkDetail(parkId) {
+    wx.showLoading({ title: '加载中...' });
+
+    try {
+      const db = wx.cloud.database();
+      const res = await db.collection('parks').doc(parkId).get();
+
+      if (res.data) {
+        this.setData({
+          park: res.data,
+          loading: false
+        });
+      } else {
+        wx.showToast({ title: '未找到公园信息', icon: 'none' });
+        setTimeout(() => wx.navigateBack(), 1500);
+      }
+    } catch (err) {
+      console.error('加载公园详情失败:', err);
+      wx.showToast({ title: '加载失败', icon: 'none' });
+      setTimeout(() => wx.navigateBack(), 1500);
+    } finally {
+      wx.hideLoading();
     }
   },
 
+  // 导航到公园
+  navigateToPark() {
+    const { park } = this.data;
+
+    wx.openLocation({
+      latitude: park.latitude,
+      longitude: park.longitude,
+      name: park.name,
+      address: park.address || park.name,
+      scale: 18
+    });
+  },
+
+  // 复制文本
+  copyText(e) {
+    const text = e.currentTarget.dataset.text;
+
+    wx.setClipboardData({
+      data: text,
+      success: () => {
+        wx.showToast({
+          title: '复制成功',
+          icon: 'success'
+        });
+      },
+      fail: () => {
+        wx.showToast({
+          title: '复制失败',
+          icon: 'none'
+        });
+      }
+    });
+  },
+
+  // 返回地图
   goBack() {
     wx.navigateBack();
   }

@@ -1,37 +1,55 @@
 <!-- pages/detail/detail.wxml -->
 <view class="container">
-  <!-- 标题：大字+宝宝图标 -->
+  <!-- 标题 -->
   <view class="header">
     <text class="title">{{park.name}}</text>
-    <image class="baby-icon" src="/images/baby-icon.png" mode="widthFix"></image>
+    <text class="copy-btn" bindtap="copyText" data-text="{{park.name}}">复制</text>
   </view>
 
-  <!-- 适合年龄：核心痛点！ -->
-  <view class="info-item">
-    <text class="label">适合年龄：</text>
-    <text class="value">{{park.suitableAge}}</text>
+  <!-- 适合年龄 -->
+  <view class="info-item" wx:if="{{park.suitableAge}}">
+    <view class="info-content">
+      <text class="label">适合年龄：</text>
+      <text class="value">{{park.suitableAge}}</text>
+    </view>
   </view>
 
-  <!-- 关键设施：一眼看懂有什么 -->
-  <view class="info-item">
-    <text class="label">关键设施：</text>
-    <text class="value">{{park.facilities}}</text>
+  <!-- 关键设施 -->
+  <view class="info-item" wx:if="{{park.facilities}}">
+    <view class="info-content">
+      <text class="label">关键设施：</text>
+      <text class="value">{{park.facilities}}</text>
+    </view>
   </view>
 
-  <!-- 开放时间：避免白跑一趟 -->
-  <view class="info-item">
-    <text class="label">开放时间：</text>
-    <text class="value">8:00-22:00</text>
+  <!-- 开放时间 -->
+  <view class="info-item" wx:if="{{park.openTime}}">
+    <view class="info-content">
+      <text class="label">开放时间：</text>
+      <text class="value">{{park.openTime}}</text>
+    </view>
   </view>
 
-  <!-- 地址：精准定位 -->
-  <view class="info-item">
-    <text class="label">地址：</text>
-    <text class="value">{{park.address}}</text>
+  <!-- 地址 -->
+  <view class="info-item" wx:if="{{park.address}}">
+    <view class="info-content">
+      <text class="label">地址：</text>
+      <text class="value">{{park.address}}</text>
+    </view>
+    <text class="copy-btn" bindtap="copyText" data-text="{{park.address}}">复制</text>
   </view>
 
-  <!-- 底部导航：只保留"返回" -->
+  <!-- 描述 -->
+  <view class="info-item" wx:if="{{park.description}}">
+    <view class="info-content">
+      <text class="label">简介：</text>
+      <text class="value">{{park.description}}</text>
+    </view>
+  </view>
+
+  <!-- 底部按钮 -->
   <view class="footer">
-    <button class="back-btn" bindtap="goBack">返回地图</button>
+    <button class="nav-btn" bindtap="navigateToPark">导航</button>
+    <button class="back-btn" bindtap="goBack">返回</button>
   </view>
 </view>

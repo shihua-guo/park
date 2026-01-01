@@ -1,5 +1,5 @@
 <!-- pages/index/index.wxml -->
-<map 
+<map
   id="myMap"
   longitude="{{longitude}}"
   latitude="{{latitude}}"
@@ -7,6 +7,7 @@
   show-location
   markers="{{markers}}"
   bindmarkertap="onMarkerTap"
+  bindregionchange="onRegionChange"
   style="width: 100vw; height: 100vh;"
   enable-3D="{{true}}"
   enable-overlooking="{{true}}"
