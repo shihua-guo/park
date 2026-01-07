@@ -1,0 +1,18 @@
+<view class="page" wx:if="{{location}}">
+  <view class="top-bar">
+    <text class="title">{{location.name}}</text>
+    <text class="subtitle">共 {{location.gallery.length}} 张图片</text>
+  </view>
+  <view class="gallery-grid">
+    <view
+      class="card"
+      wx:for="{{location.gallery}}"
+      wx:key="id"
+      data-url="{{item.url}}"
+      bindtap="handlePreview"
+    >
+      <image src="{{item.url}}" mode="aspectFill" />
+    </view>
+  </view>
+  <view class="footer">已显示全部图片</view>
+</view>

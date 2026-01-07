@@ -1,0 +1,69 @@
+<view class="page">
+  <view class="top-shell">
+    <view class="city-row">
+      <text class="city">{{city.name}}</text>
+      <text class="chevron">⌄</text>
+    </view>
+    <view class="search-box">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        placeholder="搜索公园、步道..."
+        value="{{searchValue}}"
+        bindinput="handleSearchInput"
+        confirm-type="search"
+      />
+    </view>
+    
+  </view>
+
+  <view class="map-section">
+    <map
+      id="home-map"
+      class="map"
+      latitude="{{city.latitude}}"
+      longitude="{{city.longitude}}"
+      scale="13"
+      markers="{{markers}}"
+      include-points="{{includePoints}}"
+      bindmarkertap="onMarkerTap"
+      enable-zoom="true"
+      enable-scroll="true"
+      show-location="true"
+    ></map>
+
+    <view class="card-panel">
+      <swiper class="card-swiper" current="{{currentIndex}}" circular="true" bindchange="onSwiperChange">
+        <block wx:for="{{locations}}" wx:key="id">
+          <swiper-item>
+            <view class="location-card" data-id="{{item.id}}" bindtap="handleNavigateToDetail">
+              <view class="card-header">
+                <image class="thumbnail" src="{{item.coverImages[0]}}" mode="aspectFill" />
+                <view class="card-meta">
+                  <text class="name">{{item.name}}</text>
+                  <text class="rating">★ {{item.rating}} · {{item.reviewCount}} 条精选评价</text>
+                  <view class="tags">
+                    <text wx:for="{{item.tags}}" wx:key="tag" class="tag">{{tag}}</text>
+                  </view>
+                </view>
+              </view>
+              <view class="card-body">
+                <text class="address">{{item.address}}</text>
+                <text class="distance">{{item.distance}} · {{item.travelTime}}</text>
+              </view>
+              <view class="card-footer">
+                <view class="status">
+                  <text class="dot"></text>
+                  <text>{{item.status}} {{item.hours}}</text>
+                </view>
+                <button class="primary" type="default" catchtap="handleGuide" data-id="{{item.id}}">
+                  导航前往
+                </button>
+              </view>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+</view>

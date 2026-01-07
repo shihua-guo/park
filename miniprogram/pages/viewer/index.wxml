@@ -1,0 +1,5 @@
+<view class="page" bindtap="handleClose">
+  <image class="full-image" src="{{imageUrl}}" mode="aspectFit" />
+  <view class="close-btn" catchtap="handleClose">✕</view>
+  <view class="hint">轻触任意位置关闭</view>
+</view>
