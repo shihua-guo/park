@@ -1,0 +1,85 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 地图视图 -->
+  <map 
+    id="map" 
+    class="map" 
+    longitude="{{longitude}}" 
+    latitude="{{latitude}}" 
+    scale="{{scale}}"
+    markers="{{markers}}"
+    bindmarkertap="onMarkerTap"
+    show-location="{{true}}"
+  >
+    <!-- 地图上的渐变遮罩 -->
+    <cover-view class="map-overlay"></cover-view>
+  </map>
+
+  <!-- 顶部搜索栏和标签 -->
+  <view class="top-bar">
+    <view class="search-container">
+      <view class="city-selector" bindtap="onCitySelect">
+        <text class="city-text">{{currentCity}}</text>
+        <text class="icon-arrow">▼</text>
+      </view>
+      <view class="search-box">
+        <text class="icon-search">🔍</text>
+        <input class="search-input" placeholder="搜索公园、步道..." />
+      </view>
+    </view>
+    
+    <!-- 分类标签 -->
+    <scroll-view class="category-scroll" scroll-x="{{true}}" show-scrollbar="{{false}}">
+      <view class="category-item filter-btn" bindtap="onFilterTap">
+        <text class="category-icon">⚙️</text>
+        <text class="category-text">类型</text>
+      </view>
+      <view 
+        wx:for="{{categories}}" 
+        wx:key="id" 
+        class="category-item {{currentCategory === item.id ? 'active' : ''}}"
+        bindtap="onCategoryTap"
+        data-id="{{item.id}}"
+      >
+        <text class="category-icon">{{item.icon}}</text>
+        <text class="category-text">{{item.name}}</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 定位按钮 -->
+  <view class="location-btn" bindtap="onLocationTap">
+    <text class="icon-location">📍</text>
+  </view>
+
+  <!-- 底部地点卡片 -->
+  <view class="place-card {{showCard ? 'show' : ''}}" bindtap="onCardTap">
+    <view class="card-content">
+      <view class="card-image-container">
+        <image class="card-image" src="{{currentPlace.image}}" mode="aspectFill" />
+        <view class="card-rating">
+          <text class="star-icon">⭐</text>
+          <text class="rating-text">{{currentPlace.rating}}</text>
+        </view>
+      </view>
+      
+      <view class="card-info">
+        <view class="card-header">
+          <text class="card-title">{{currentPlace.name}}</text>
+        </view>
+        <view class="card-tags">
+          <text class="tag" wx:for="{{currentPlace.tags}}" wx:key="*this">{{item}}</text>
+        </view>
+        <view class="card-location">
+          <text class="location-icon">📍</text>
+          <text class="location-text">{{currentPlace.address}} · {{currentPlace.distance}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <button class="navigate-btn" catchtap="onNavigate">
+      <text class="nav-icon">🧭</text>
+      <text class="nav-text">导航前往</text>
+    </button>
+  </view>
+</view>

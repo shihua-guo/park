@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>全屏图片 - 童行鹏城</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2094f3",
+                        "primary-dark": "#1976d2",
+                        "natural-green": "#4CAF50",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans SC", "sans-serif"],
+                        "body": ["Plus Jakarta Sans", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>body {
+            -ms-overflow-style: none;scrollbar-width: none;}
+        body::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black font-display text-white h-screen w-full flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute top-3 left-1/2 transform -translate-x-1/2 w-10 h-1.5 bg-white/20 rounded-full z-50 pointer-events-none"></div>
+<div class="absolute top-0 left-0 right-0 p-4 pt-12 flex justify-between items-start z-50 pointer-events-none">
+<button class="pointer-events-auto ml-auto w-8 h-8 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md hover:bg-white/30 active:scale-95 transition-all text-white border border-white/10 shadow-lg">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="w-full h-full flex items-center justify-center bg-black relative">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_#1a1a1a_0%,_#000000_100%)] -z-10"></div>
+<img alt="Detail view of indoor playground" class="w-full h-full object-contain max-h-[90vh] transition-transform duration-300 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM-5cMKDvgQILvtAwmlzVtZ_BX3zyzirJFn_6mN0swZFjD8gSzoyvKDAEWRI8Lv497jDVD-u2qHen1XP0jabWOgyZs_G3-pJ_rNBb4I3KZS0C1ihqKokSRx1B4goBRqRIEeVoAnG3VOVYXg8WX1rA3Ic3a3tcsYc6CaWdhDEsJ3Ugg1q_o5Q6XH-YPVgMTJxHyfzWud2bsighX9IL65z_D_j6_lyAJp5oVUnO7RMQj8ucIZpJkqCE6S5VtOLWvQQFLkiG1CCUmOc8s"/>
+</div>
+
+</body></html>

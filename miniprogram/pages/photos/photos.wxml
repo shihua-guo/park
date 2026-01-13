@@ -1,0 +1,61 @@
+<!--photos.wxml-->
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-btn" bindtap="onBack">
+      <text class="icon">‹</text>
+    </view>
+    <text class="nav-title">{{placeName}}</text>
+    <view class="nav-btn" bindtap="onMore">
+      <text class="icon">⋯</text>
+    </view>
+  </view>
+
+  <!-- 瀑布流图片列表 -->
+  <view class="photos-container">
+    <view class="waterfall">
+      <!-- 左列 -->
+      <view class="column left-column">
+        <view 
+          wx:for="{{leftImages}}" 
+          wx:key="index"
+          class="photo-item"
+          bindtap="onPhotoTap"
+          data-index="{{item.originalIndex}}"
+        >
+          <image 
+            class="photo-image" 
+            src="{{item.url}}" 
+            mode="widthFix"
+            lazy-load="{{true}}"
+          />
+        </view>
+      </view>
+      
+      <!-- 右列 -->
+      <view class="column right-column">
+        <view 
+          wx:for="{{rightImages}}" 
+          wx:key="index"
+          class="photo-item"
+          bindtap="onPhotoTap"
+          data-index="{{item.originalIndex}}"
+        >
+          <image 
+            class="photo-image" 
+            src="{{item.url}}" 
+            mode="widthFix"
+            lazy-load="{{true}}"
+          />
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部提示 -->
+    <view class="end-tip">
+      <view class="tip-line"></view>
+      <text class="tip-text">已显示全部图片</text>
+      <view class="tip-line"></view>
+    </view>
+  </view>
+</view>

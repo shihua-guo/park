@@ -1,0 +1,172 @@
+<!--detail.wxml-->
+<view class="container">
+  <!-- 顶部图片轮播 -->
+  <view class="header-section">
+    <swiper 
+      class="image-swiper" 
+      indicator-dots="{{false}}"
+      circular="{{true}}"
+      autoplay="{{false}}"
+      bindchange="onSwiperChange"
+      bindtap="onImageTap"
+    >
+      <swiper-item wx:for="{{images}}" wx:key="*this">
+        <image class="swiper-image" src="{{item}}" mode="aspectFill" />
+      </swiper-item>
+    </swiper>
+    
+    <!-- 顶部遮罩渐变 -->
+    <view class="header-gradient"></view>
+    
+    <!-- 顶部导航栏 -->
+    <view class="nav-bar">
+      <view class="nav-btn back-btn" bindtap="onBack">
+        <text class="icon">←</text>
+      </view>
+      <view class="nav-actions">
+        <view class="nav-btn" bindtap="onShare">
+          <text class="icon">↗️</text>
+        </view>
+        <view class="nav-btn" bindtap="onMore">
+          <text class="icon">⋯</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 轮播切换按钮 -->
+    <view class="swiper-controls">
+      <view class="control-btn prev-btn" bindtap="onPrevImage">
+        <text class="icon">‹</text>
+      </view>
+      <view class="control-btn next-btn" bindtap="onNextImage">
+        <text class="icon">›</text>
+      </view>
+    </view>
+    
+    <!-- 图片计数器 -->
+    <view class="image-counter">
+      <text class="icon">🖼️</text>
+      <text>{{currentImageIndex + 1}} / {{images.length}}</text>
+    </view>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="content-section">
+    <!-- 拖动指示器 -->
+    <view class="drag-indicator"></view>
+    
+    <!-- 标题和评分 -->
+    <view class="title-section">
+      <text class="title">{{placeInfo.name}}</text>
+      <view class="rating-row">
+        <view class="rating">
+          <text class="star-icon">⭐</text>
+          <text class="rating-text">{{placeInfo.rating}}</text>
+        </view>
+        <text class="divider">|</text>
+        <text class="reviews-text">{{placeInfo.reviewCount}} 条精选评价</text>
+      </view>
+    </view>
+
+    <!-- 标签 -->
+    <view class="tags-section">
+      <view class="tag" wx:for="{{placeInfo.tags}}" wx:key="*this">
+        <text class="tag-icon">{{item.icon}}</text>
+        <text class="tag-text">{{item.text}}</text>
+      </view>
+    </view>
+
+    <!-- 信息列表 -->
+    <view class="info-list">
+      <!-- 地址 -->
+      <view class="info-item" bindtap="onAddressTap">
+        <view class="info-icon-wrapper address-icon">
+          <text class="info-icon">📍</text>
+        </view>
+        <view class="info-content">
+          <text class="info-text">{{placeInfo.address}}</text>
+          <text class="info-sub">距您 {{placeInfo.distance}} · 驾车约 {{placeInfo.driveTime}}</text>
+        </view>
+        <text class="arrow-icon">›</text>
+      </view>
+
+      <!-- 营业时间 -->
+      <view class="info-item">
+        <view class="info-icon-wrapper time-icon">
+          <text class="info-icon">🕐</text>
+        </view>
+        <view class="info-content">
+          <view class="time-row">
+            <text class="status-badge">{{placeInfo.status}}</text>
+            <text class="info-text">{{placeInfo.hours}}</text>
+          </view>
+          <text class="info-sub">{{placeInfo.hoursNote}}</text>
+        </view>
+        <text class="arrow-icon collapse">▼</text>
+      </view>
+
+      <!-- 电话 -->
+      <view class="info-item" bindtap="onCallTap">
+        <view class="info-icon-wrapper phone-icon">
+          <text class="info-icon">📞</text>
+        </view>
+        <view class="info-content">
+          <text class="info-text">{{placeInfo.phone}}</text>
+        </view>
+        <view class="call-btn" catchtap="onCallTap">
+          <text class="call-text">拨打</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 地点介绍 -->
+    <view class="description-section">
+      <view class="section-title">
+        <view class="title-indicator"></view>
+        <text class="title-text">地点介绍</text>
+      </view>
+      <view class="description-text">
+        <text>{{placeInfo.description}}</text>
+      </view>
+      <view class="expand-btn" bindtap="onExpandDescription">
+        <text class="expand-text">查看全部介绍</text>
+        <text class="expand-icon">▼</text>
+      </view>
+    </view>
+
+    <!-- 配套设施 -->
+    <view class="facilities-section">
+      <view class="section-title">
+        <view class="title-indicator"></view>
+        <text class="title-text">配套设施</text>
+      </view>
+      <view class="facilities-grid">
+        <view class="facility-item" wx:for="{{placeInfo.facilities}}" wx:key="*this">
+          <text class="facility-icon">{{item.icon}}</text>
+          <text class="facility-text">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部占位 -->
+    <view class="bottom-placeholder"></view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="footer-bar">
+    <view class="footer-actions">
+      <view class="action-btn" bindtap="onFavorite">
+        <text class="action-icon">{{isFavorite ? '❤️' : '🤍'}}</text>
+        <text class="action-text">收藏</text>
+      </view>
+      <view class="action-btn" bindtap="onReview">
+        <text class="action-icon">💬</text>
+        <text class="action-text">写评价</text>
+      </view>
+    </view>
+    <button class="navigate-btn" bindtap="onNavigate">
+      <text class="nav-icon">🧭</text>
+      <text class="nav-text">导航前往</text>
+    </button>
+  </view>
+</view>

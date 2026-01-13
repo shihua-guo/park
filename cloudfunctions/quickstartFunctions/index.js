@@ -157,6 +157,28 @@ const deleteRecord = async (event) => {
   }
 };
 
+// 读取parks集合
+const getParks = async (event) => {
+  try {
+    const { limit = 100, skip = 0 } = event;
+    const result = await db
+      .collection("parks")
+      .skip(skip)
+      .limit(limit)
+      .get();
+    return {
+      success: true,
+      data: result.data,
+      total: result.data.length,
+    };
+  } catch (e) {
+    return {
+      success: false,
+      errMsg: e.message || e,
+    };
+  }
+};
+
 // const getOpenId = require('./getOpenId/index');
 // const getMiniProgramCode = require('./getMiniProgramCode/index');
 // const createCollection = require('./createCollection/index');
@@ -182,5 +204,7 @@ exports.main = async (event, context) => {
       return await insertRecord(event);
     case "deleteRecord":
       return await deleteRecord(event);
+    case "getParks":
+      return await getParks(event);
   }
 };

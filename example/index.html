@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>童行鹏城 - Child-Friendly Shenzhen Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2094f3",
+                        "primary-dark": "#1976d2",
+                        "natural-green": "#4CAF50",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans SC", "sans-serif"],
+                        "body": ["Plus Jakarta Sans", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    backgroundImage: {
+                        'soft-gradient': 'linear-gradient(135deg, #E8F5E9 0%, #BBDEFB 100%)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>.hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }@keyframes pulse-ring {
+            0% { transform: scale(0.33); }
+            80%, 100% { opacity: 0; }
+        }
+        @keyframes pulse-dot {
+            0% { transform: scale(0.8); }
+            50% { transform: scale(1); }
+            100% { transform: scale(0.8); }
+        }
+        .pin-ring::before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            background-color: #2094f3;
+            animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+            z-index: -1;
+            opacity: 0.6;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 overflow-hidden h-screen w-full flex flex-col relative">
+<div class="absolute inset-0 w-full h-full z-0 bg-cover bg-center" data-alt="Minimalist map of Shenzhen city with streets and green parks" data-location="Shenzhen" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBEMaPB8VXrI2HXdyN_W6hN-qpyf147Jsv0-dGllyIonZXYqpoVLjgo8L1CNnMOgdGbc4wqc1rd6epd6mGuKmt1fKFdlSAVTNwUZP4aYQwO6rOeuWDANpxhu1otYy9PTqpiHUolpzBbPRINsHbByFQKgeLgu7bS4xfqWQGnNVvy8BG-actyt04Iy_weEZsfRDGhz2L6M4jjAW36X_GPQLgG3-a20sHyR6KpQfF9Q_0ULyzGVlvhZY5N2YZYKh2QgAZTzLe5v5D-8Oqe');">
+<div class="absolute inset-0 bg-soft-gradient opacity-30 mix-blend-overlay pointer-events-none"></div>
+<div class="absolute top-[30%] left-[45%] flex flex-col items-center group cursor-pointer">
+<div class="relative flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-lg border-2 border-natural-green text-natural-green transform transition-transform hover:scale-110 z-10">
+<span class="material-symbols-outlined text-[20px]">park</span>
+<span class="absolute -top-1 -right-1 text-[10px]">😊</span>
+</div>
+<div class="mt-1 px-2 py-0.5 bg-white/90 backdrop-blur-sm rounded text-[10px] font-bold shadow-sm text-slate-700 whitespace-nowrap">
+                深圳儿童公园
+            </div>
+</div>
+<div class="absolute top-[20%] left-[60%] flex flex-col items-center group cursor-pointer">
+<div class="relative flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-lg border-2 border-[#8D6E63] text-[#8D6E63] transform transition-transform hover:scale-110 z-10">
+<span class="material-symbols-outlined text-[20px]">forest</span>
+<span class="absolute -top-1 -right-1 text-[10px]">👣</span>
+</div>
+</div>
+<div class="absolute top-[45%] left-[50%] flex flex-col items-center group cursor-pointer z-20">
+<div class="pin-ring w-12 h-12 absolute -inset-1 rounded-full bg-primary/20"></div>
+<div class="relative flex items-center justify-center w-10 h-10 bg-primary text-white rounded-full shadow-xl transform scale-110 z-10">
+<span class="material-symbols-outlined text-[20px]">home</span>
+<span class="absolute -top-1 -right-1 text-[10px]">🧸</span>
+</div>
+<div class="mt-2 text-primary font-bold text-xs drop-shadow-md bg-white/90 px-2 py-0.5 rounded shadow-sm">
+                欢乐海岸室内乐园
+            </div>
+</div>
+<div class="absolute top-[60%] left-[30%] flex flex-col items-center group cursor-pointer">
+<div class="relative flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-lg border-2 border-blue-400 text-blue-400 transform transition-transform hover:scale-110 z-10">
+<span class="material-symbols-outlined text-[20px]">water_drop</span>
+<span class="absolute -top-1 -right-1 text-[10px]">🛟</span>
+</div>
+</div>
+<div class="absolute top-[35%] left-[25%] flex flex-col items-center group cursor-pointer">
+<div class="relative flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-lg border-2 border-slate-500 text-slate-500 transform transition-transform hover:scale-110 z-10">
+<span class="material-symbols-outlined text-[20px]">museum</span>
+<span class="absolute -top-1 -right-1 text-[10px]">👶</span>
+</div>
+</div>
+</div>
+<div class="relative z-30 flex flex-col h-full pointer-events-none">
+<div class="pointer-events-auto px-4 pt-12 pb-2 bg-gradient-to-b from-white/90 via-white/60 to-transparent">
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-1 bg-white/80 backdrop-blur-md shadow-sm border border-slate-100 h-10 px-3 rounded-lg active:scale-95 transition-transform">
+<span class="text-sm font-medium text-slate-800">深圳</span>
+<span class="material-symbols-outlined text-slate-600 text-[18px]">expand_more</span>
+</button>
+<div class="flex-1 shadow-sm rounded-lg h-10 bg-white/90 backdrop-blur-md flex items-center px-3 border border-slate-100">
+<span class="material-symbols-outlined text-slate-400 text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-slate-400 text-slate-800 h-full p-0 pl-2" placeholder="搜索公园、步道..." type="text"/>
+</div>
+</div>
+<div class="flex gap-2 mt-3 overflow-x-auto hide-scrollbar pb-1">
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-1 rounded-lg bg-white shadow-sm border border-slate-100 px-3 active:bg-slate-50">
+<span class="material-symbols-outlined text-slate-700 text-[18px]">tune</span>
+<span class="text-slate-700 text-xs font-medium">类型</span>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-1 rounded-lg bg-primary text-white shadow-md shadow-primary/20 px-3">
+<span class="material-symbols-outlined text-[16px]">home</span>
+<span class="text-xs font-medium">室内乐园</span>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-1 rounded-lg bg-white/80 backdrop-blur-sm shadow-sm border border-slate-100 px-3 text-slate-600 hover:bg-white">
+<span class="material-symbols-outlined text-[16px] text-natural-green">park</span>
+<span class="text-xs font-medium">儿童公园</span>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-1 rounded-lg bg-white/80 backdrop-blur-sm shadow-sm border border-slate-100 px-3 text-slate-600 hover:bg-white">
+<span class="material-symbols-outlined text-[16px] text-[#8D6E63]">forest</span>
+<span class="text-xs font-medium">森林步道</span>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-1 rounded-lg bg-white/80 backdrop-blur-sm shadow-sm border border-slate-100 px-3 text-slate-600 hover:bg-white">
+<span class="material-symbols-outlined text-[16px] text-[#FF9800]">agriculture</span>
+<span class="text-xs font-medium">农场体验</span>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-1 rounded-lg bg-white/80 backdrop-blur-sm shadow-sm border border-slate-100 px-3 text-slate-600 hover:bg-white">
+<span class="material-symbols-outlined text-[16px] text-blue-400">water_drop</span>
+<span class="text-xs font-medium">水上乐园</span>
+</button>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-end pb-8 px-4">
+<div class="flex flex-col items-end gap-3 pointer-events-auto mb-4 self-end">
+<button class="flex size-10 items-center justify-center rounded-lg bg-white shadow-md text-slate-700 active:bg-slate-50">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+</div>
+<div class="pointer-events-auto w-full bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] p-4 animate-in slide-in-from-bottom-10 fade-in duration-300">
+<div class="flex gap-4">
+<div class="w-24 h-24 shrink-0 rounded-lg bg-cover bg-center bg-slate-100 relative" data-alt="Bright indoor playground with colorful slides and ball pit" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDM-5cMKDvgQILvtAwmlzVtZ_BX3zyzirJFn_6mN0swZFjD8gSzoyvKDAEWRI8Lv497jDVD-u2qHen1XP0jabWOgyZs_G3-pJ_rNBb4I3KZS0C1ihqKokSRx1B4goBRqRIEeVoAnG3VOVYXg8WX1rA3Ic3a3tcsYc6CaWdhDEsJ3Ugg1q_o5Q6XH-YPVgMTJxHyfzWud2bsighX9IL65z_D_j6_lyAJp5oVUnO7RMQj8ucIZpJkqCE6S5VtOLWvQQFLkiG1CCUmOc8s');">
+<div class="absolute top-1 right-1 bg-black/40 rounded px-1.5 py-0.5 text-[10px] text-white backdrop-blur-sm flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[10px]">star</span>
+                             4.8
+                         </div>
+</div>
+<div class="flex flex-col flex-1 justify-between py-0.5">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="text-base font-bold text-slate-900 leading-tight">欢乐海岸室内乐园</h3>
+</div>
+<div class="flex items-center gap-2 mt-1.5 flex-wrap">
+<span class="bg-blue-50 text-primary text-[10px] px-1.5 py-0.5 rounded font-medium">室内空调</span>
+<span class="bg-green-50 text-natural-green text-[10px] px-1.5 py-0.5 rounded font-medium">适合 2-6岁</span>
+</div>
+<p class="text-slate-500 text-xs mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                                南山区滨海大道2008号 · 1.2km
+                            </p>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full bg-primary active:bg-primary-dark text-white h-10 rounded-lg flex items-center justify-center gap-2 font-medium shadow-md shadow-blue-200">
+<span class="material-symbols-outlined text-[18px]">near_me</span>
+<span>导航前往</span>
+</button>
+</div>
+</div>
+</div>
+
+</body></html>

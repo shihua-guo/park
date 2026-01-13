@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>地点详情 - 童行鹏城</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2094f3",
+                        "primary-dark": "#1976d2",
+                        "natural-green": "#4CAF50",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans SC", "sans-serif"],
+                        "body": ["Plus Jakarta Sans", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    backgroundImage: {
+                        'soft-gradient': 'linear-gradient(135deg, #E8F5E9 0%, #BBDEFB 100%)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 overflow-hidden h-screen w-full flex flex-col relative">
+<div class="flex-1 overflow-y-auto bg-white relative pb-24 w-full">
+<div class="relative w-full h-[42vh] bg-slate-200">
+<a aria-label="查看图片列表" class="block w-full h-full relative group cursor-pointer active:opacity-90 transition-opacity" href="#">
+<img alt="Detail Image" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM-5cMKDvgQILvtAwmlzVtZ_BX3zyzirJFn_6mN0swZFjD8gSzoyvKDAEWRI8Lv497jDVD-u2qHen1XP0jabWOgyZs_G3-pJ_rNBb4I3KZS0C1ihqKokSRx1B4goBRqRIEeVoAnG3VOVYXg8WX1rA3Ic3a3tcsYc6CaWdhDEsJ3Ugg1q_o5Q6XH-YPVgMTJxHyfzWud2bsighX9IL65z_D_j6_lyAJp5oVUnO7RMQj8ucIZpJkqCE6S5VtOLWvQQFLkiG1CCUmOc8s"/>
+<div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/10 pointer-events-none"></div>
+</a>
+<div class="absolute top-0 left-0 right-0 p-4 pt-12 flex justify-between items-center z-30 pointer-events-none">
+<button class="pointer-events-auto w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/30 active:scale-95 transition-all shadow-lg">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<div class="flex gap-3 pointer-events-auto">
+<button class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/30 active:scale-95 transition-all shadow-lg">
+<span class="material-symbols-outlined text-[20px]">ios_share</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/30 active:scale-95 transition-all shadow-lg">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+</div>
+<button class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/20 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-black/40 active:scale-95 transition-all z-20 shadow-md">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</button>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/20 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-black/40 active:scale-95 transition-all z-20 shadow-md">
+<span class="material-symbols-outlined text-[24px]">chevron_right</span>
+</button>
+<div class="absolute bottom-10 right-4 px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-white text-xs font-medium border border-white/10 z-20 flex items-center gap-1 pointer-events-none">
+<span class="material-symbols-outlined text-[14px]">photo_library</span>
+<span>1 / 8</span>
+</div>
+</div>
+<div class="relative z-10 -mt-6 bg-white rounded-t-3xl px-6 pt-8 pb-10 min-h-[60vh] shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<div class="w-10 h-1 bg-slate-200 rounded-full mx-auto mb-6"></div>
+<div class="mb-5">
+<h1 class="text-2xl font-bold text-slate-900 leading-tight mb-2">欢乐海岸室内乐园</h1>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 text-amber-400">
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="text-slate-900 font-bold text-base">4.8</span>
+</div>
+<span class="text-slate-300">|</span>
+<span class="text-slate-500 text-sm">1,203 条精选评价</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="inline-flex items-center gap-1 bg-blue-50 text-primary text-xs px-2.5 py-1.5 rounded-lg font-medium">
+<span class="material-symbols-outlined text-[14px]">ac_unit</span>
+                    室内空调
+                </span>
+<span class="inline-flex items-center gap-1 bg-green-50 text-natural-green text-xs px-2.5 py-1.5 rounded-lg font-medium">
+<span class="material-symbols-outlined text-[14px]">child_care</span>
+                    适合 2-6岁
+                </span>
+<span class="inline-flex items-center gap-1 bg-orange-50 text-orange-600 text-xs px-2.5 py-1.5 rounded-lg font-medium">
+<span class="material-symbols-outlined text-[14px]">restaurant</span>
+                    亲子餐厅
+                </span>
+</div>
+<div class="space-y-1 mb-8">
+<div class="flex items-start gap-4 py-4 border-t border-slate-100 group cursor-pointer active:bg-slate-50 -mx-6 px-6 transition-colors">
+<div class="w-9 h-9 rounded-full bg-blue-50 text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+</div>
+<div class="flex-1">
+<p class="text-slate-900 font-medium text-sm leading-snug">南山区滨海大道2008号欢乐海岸购物中心 L2-035</p>
+<p class="text-slate-400 text-xs mt-1">距您 1.2km · 驾车约 5分钟</p>
+</div>
+<span class="material-symbols-outlined text-slate-300 self-center">chevron_right</span>
+</div>
+<div class="flex items-start gap-4 py-4 border-t border-slate-100 -mx-6 px-6">
+<div class="w-9 h-9 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-green-600 font-bold text-[10px] bg-green-50 px-1.5 py-0.5 rounded border border-green-100">营业中</span>
+<p class="text-slate-900 font-medium text-sm">10:00 - 22:00</p>
+</div>
+<p class="text-slate-400 text-xs">周末及节假日照常开放</p>
+</div>
+<span class="material-symbols-outlined text-slate-300 self-center">expand_more</span>
+</div>
+<div class="flex items-start gap-4 py-4 border-t border-slate-100 -mx-6 px-6 group cursor-pointer active:bg-slate-50 transition-colors">
+<div class="w-9 h-9 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">call</span>
+</div>
+<div class="flex-1 self-center">
+<p class="text-slate-900 font-medium text-sm">0755-8888 6666</p>
+</div>
+<button class="text-xs font-medium text-primary border border-primary/30 px-3 py-1.5 rounded-full hover:bg-primary/5 active:bg-primary/10">
+                        拨打
+                    </button>
+</div>
+</div>
+<div class="py-6 border-t border-slate-100">
+<h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+<span class="w-1 h-5 bg-primary rounded-full"></span>
+                    地点介绍
+                </h3>
+<div class="text-slate-600 text-sm leading-7 text-justify space-y-4">
+<p>
+                        这是一个专为学龄前儿童打造的梦幻乐园，整体设计采用柔和的马卡龙色系，视觉舒适，保护宝宝视力。乐园内设有超大的海洋球池、全软包攀爬架、原木沙池以及模拟超市厨房等角色扮演区域。
+                    </p>
+<p>
+                        此外，乐园还配备了专业的亲子餐厅和母婴室，设施齐全，非常适合周末遛娃。所有游乐设施每天定时消毒，确保孩子们玩得开心又安心。
+                    </p>
+</div>
+<button class="mt-4 flex items-center justify-center w-full py-2 text-xs text-slate-400 font-medium gap-1 hover:text-slate-600 transition-colors">
+                    查看全部介绍
+                    <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+<div class="py-6 border-t border-slate-100">
+<h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+<span class="w-1 h-5 bg-primary rounded-full"></span>
+                    配套设施
+                </h3>
+<div class="grid grid-cols-4 gap-4">
+<div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-slate-50">
+<span class="material-symbols-outlined text-slate-600">wifi</span>
+<span class="text-[10px] text-slate-500">WIFI</span>
+</div>
+<div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-slate-50">
+<span class="material-symbols-outlined text-slate-600">local_parking</span>
+<span class="text-[10px] text-slate-500">停车场</span>
+</div>
+<div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-slate-50">
+<span class="material-symbols-outlined text-slate-600">baby_changing_station</span>
+<span class="text-[10px] text-slate-500">母婴室</span>
+</div>
+<div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-slate-50">
+<span class="material-symbols-outlined text-slate-600">restaurant</span>
+<span class="text-[10px] text-slate-500">餐厅</span>
+</div>
+</div>
+</div>
+<div class="h-8"></div>
+</div>
+</div>
+<div class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-100 px-6 py-3 pb-8 z-40 flex items-center gap-4 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<div class="flex items-center gap-6 mr-2">
+<button class="flex flex-col items-center justify-center gap-1 text-slate-500 active:text-primary transition-colors group">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">favorite_border</span>
+<span class="text-[10px] font-medium">收藏</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 text-slate-500 active:text-primary transition-colors group">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">reviews</span>
+<span class="text-[10px] font-medium">写评价</span>
+</button>
+</div>
+<button class="flex-1 bg-primary active:bg-primary-dark text-white h-12 rounded-full flex items-center justify-center gap-2 font-bold shadow-lg shadow-blue-200 transition-all hover:shadow-xl active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]">near_me</span>
+<span>导航前往</span>
+</button>
+</div>
+
+</body></html>

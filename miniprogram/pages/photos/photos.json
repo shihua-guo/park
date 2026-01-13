@@ -1,0 +1,9 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "图片列表",
+  "navigationBarBackgroundColor": "#E8F5E9",
+  "navigationBarTextStyle": "black",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": false,
+  "backgroundColor": "#E8F5E9"
+}
