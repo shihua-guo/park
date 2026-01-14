@@ -130,7 +130,7 @@
 .location-btn {
   position: fixed;
   right: 32rpx;
-  bottom: 480rpx;
+  bottom: 260rpx;
   width: 80rpx;
   height: 80rpx;
   background: white;
@@ -146,24 +146,39 @@
   font-size: 40rpx;
 }
 
-/* 底部地点卡片 */
+/* 底部地点卡片：悬浮小卡片 */
 .place-card {
   position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 24rpx;
+  right: 24rpx;
+  bottom: calc(24rpx + env(safe-area-inset-bottom));
   background: white;
-  border-radius: 32rpx 32rpx 0 0;
-  box-shadow: 0 -8rpx 40rpx rgba(0,0,0,0.08);
-  padding: 32rpx;
-  padding-bottom: 64rpx;
-  z-index: 100;
-  transform: translateY(120%);
+  border-radius: 28rpx;
+  box-shadow: 0 12rpx 48rpx rgba(0,0,0,0.12);
+  padding: 24rpx;
+  z-index: 90;
+  transform: translateY(140%);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .place-card.show {
   transform: translateY(0);
+}
+
+.card-close {
+  position: absolute;
+  top: 12rpx;
+  right: 12rpx;
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 28rpx;
+  background: rgba(0,0,0,0.06);
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  line-height: 1;
 }
 
 .card-content {

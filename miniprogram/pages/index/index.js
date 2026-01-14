@@ -8,10 +8,10 @@ Page({
     longitude: 114.057868,
     latitude: 22.543099,
     scale: 14,
-    
+
     // 当前城市
     currentCity: '深圳',
-    
+
     // 分类数据
     categories: [
       { id: 'indoor', name: '室内乐园', icon: '🏠' },
@@ -21,21 +21,13 @@ Page({
       { id: 'water', name: '水上乐园', icon: '💧' }
     ],
     currentCategory: 'indoor',
-    
+
     // 地图标记点 - 从数据库加载
     markers: [],
-    
-    // 当前显示的地点
-    currentPlace: {
-      id: 1,
-      name: '欢乐海岸室内乐园',
-      rating: 4.8,
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDM-5cMKDvgQILvtAwmlzVtZ_BX3zyzirJFn_6mN0swZFjD8gSzoyvKDAEWRI8Lv497jDVD-u2qHen1XP0jabWOgyZs_G3-pJ_rNBb4I3KZS0C1ihqKokSRx1B4goBRqRIEeVoAnG3VOVYXg8WX1rA3Ic3a3tcsYc6CaWdhDEsJ3Ugg1q_o5Q6XH-YPVgMTJxHyfzWud2bsighX9IL65z_D_j6_lyAJp5oVUnO7RMQj8ucIZpJkqCE6S5VtOLWvQQFLkiG1CCUmOc8s',
-      tags: ['室内空调', '适合 2-6岁'],
-      address: '南山区滨海大道2008号',
-      distance: '1.2km'
-    },
-    
+
+    // 当前显示的地点（默认不显示）
+    currentPlace: null,
+
     showCard: false
   },
 
@@ -50,13 +42,6 @@ Page({
     
     // 从数据库加载parks数据
     this.loadParkData()
-    
-    // 延迟显示卡片
-    setTimeout(() => {
-      this.setData({
-        showCard: true
-      })
-    }, 500)
   },
 
   // 加载公园数据
@@ -123,55 +108,94 @@ Page({
     this.mapCtx = wx.createMapContext('map')
   },
 
-  // 点击地图（用于测试）
+  // 点击地图空白处：隐藏底部卡片
   onMapTap(e) {
-    console.log('地图被点击了:', e)
-  },
-
-  // 点击地图标记
-  onMarkerTap(e) {
-    console.log('=== 标记点击事件触发 ===')
-    console.log('事件对象:', e)
-    console.log('e.markerId:', e.markerId)
-    console.log('e.detail:', e.detail)
-    
-    const markerId = e.markerId || e.detail?.markerId
-    console.log('解析后的 markerId:', markerId)
-    console.log('当前所有 markers:', this.data.markers)
-    
-    if (!markerId) {
-      console.warn('未找到 markerId')
-      wx.showToast({
-        title: '未找到标记ID',
-        icon: 'none'
-      })
+    // 部分机型上，点击 marker 可能会连带触发一次 map tap，这里做一次性忽略
+    if (this._ignoreNextMapTap) {
+      this._ignoreNextMapTap = false
       return
     }
-    
-    // 查找对应的marker
+
+    if (this.data.showCard) {
+      this.setData({ showCard: false })
+    }
+  },
+
+  hideCard() {
+    this.setData({ showCard: false })
+  },
+
+  // 点击地图标记：弹出底部卡片（不直接跳转）
+  async onMarkerTap(e) {
+    const markerId = e.markerId || e.detail?.markerId
+    if (!markerId) {
+      wx.showToast({ title: '未找到标记ID', icon: 'none' })
+      return
+    }
+
     const marker = this.data.markers.find(m => m.id === markerId)
-    console.log('找到的 marker:', marker)
-    
-    if (marker && marker.parkId) {
-      console.log('准备跳转到详情页，parkId:', marker.parkId)
-      wx.navigateTo({
-        url: `/pages/detail/detail?id=${marker.parkId}`,
-        success: () => {
-          console.log('跳转成功')
-        },
-        fail: (err) => {
-          console.error('跳转失败:', err)
-          wx.showToast({
-            title: '跳转失败',
-            icon: 'none'
-          })
+    if (!marker) {
+      wx.showToast({ title: '未找到位置信息', icon: 'none' })
+      return
+    }
+
+    // 避免 marker 点击后又触发一次 map tap 把卡片立刻关掉
+    this._ignoreNextMapTap = true
+
+    // 先用 marker 的基础信息占位，保证“点一下就弹出”
+    const basePlace = {
+      parkId: marker.parkId || marker.id,
+      name: marker.title || '未知地点',
+      rating: marker.rating || 0,
+      image: marker.image || marker.iconPath || '',
+      tags: marker.tags || [],
+      address: marker.address || '',
+      distance: '',
+      latitude: marker.latitude,
+      longitude: marker.longitude
+    }
+
+    this.setData({
+      currentPlace: basePlace,
+      showCard: true
+    })
+
+    // 有 parkId 就从数据库补全详情字段
+    if (!marker.parkId) return
+
+    try {
+      const db = wx.cloud.database()
+      const res = await db.collection('parks').doc(marker.parkId).get()
+      const park = res?.data
+      if (!park) return
+
+      const place = {
+        parkId: marker.parkId,
+        name: park.name || basePlace.name,
+        rating: park.rating || basePlace.rating,
+        image: park.image || park.cover || park.icon || basePlace.image,
+        tags: Array.isArray(park.tags) ? park.tags : (Array.isArray(park.sceneTags) ? park.sceneTags : basePlace.tags),
+        address: park.address || park.location || basePlace.address,
+        latitude: park.latitude ?? basePlace.latitude,
+        longitude: park.longitude ?? basePlace.longitude
+      }
+
+      const distanceMeters = this.calcDistanceMeters(
+        this.data.latitude,
+        this.data.longitude,
+        place.latitude,
+        place.longitude
+      )
+
+      this.setData({
+        currentPlace: {
+          ...basePlace,
+          ...place,
+          distance: this.formatDistance(distanceMeters)
         }
       })
-    } else {
-      console.log('未找到对应的marker或parkId为空，显示卡片')
-      this.setData({
-        showCard: true
-      })
+    } catch (err) {
+      console.warn('补全地点信息失败（不影响弹出卡片）:', err)
     }
   },
 
@@ -231,18 +255,42 @@ Page({
 
   // 点击卡片跳转到详情页
   onCardTap() {
+    const place = this.data.currentPlace
+    const id = place?.parkId
+    if (!id) return
+
     wx.navigateTo({
-      url: `/pages/detail/detail?id=${this.data.currentPlace.id}`
+      url: `/pages/detail/detail?id=${id}`
     })
+  },
+
+  calcDistanceMeters(lat1, lon1, lat2, lon2) {
+    if ([lat1, lon1, lat2, lon2].some(v => typeof v !== 'number')) return NaN
+    const R = 6371000
+    const toRad = d => (d * Math.PI) / 180
+    const dLat = toRad(lat2 - lat1)
+    const dLon = toRad(lon2 - lon1)
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+  },
+
+  formatDistance(meters) {
+    if (!Number.isFinite(meters)) return ''
+    if (meters < 1000) return `${Math.round(meters)}m`
+    return `${(meters / 1000).toFixed(1)}km`
   },
 
   // 点击导航按钮
   onNavigate(e) {
-    // 阻止事件冒泡，避免触发卡片点击
     const place = this.data.currentPlace
+    if (!place) return
+
     wx.openLocation({
-      latitude: this.data.latitude,
-      longitude: this.data.longitude,
+      latitude: place.latitude ?? this.data.latitude,
+      longitude: place.longitude ?? this.data.longitude,
       name: place.name,
       address: place.address,
       scale: 18

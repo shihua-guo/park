@@ -51,31 +51,33 @@
     <text class="icon-location">📍</text>
   </view>
 
-  <!-- 底部地点卡片 -->
+  <!-- 底部地点卡片：默认隐藏，点 marker 才弹出 -->
   <view class="place-card {{showCard ? 'show' : ''}}" bindtap="onCardTap">
+    <view class="card-close" catchtap="hideCard">×</view>
+
     <view class="card-content">
       <view class="card-image-container">
-        <image class="card-image" src="{{currentPlace.image}}" mode="aspectFill" />
-        <view class="card-rating">
+        <image class="card-image" src="{{currentPlace ? currentPlace.image : ''}}" mode="aspectFill" />
+        <view class="card-rating" wx:if="{{currentPlace && currentPlace.rating}}">
           <text class="star-icon">⭐</text>
           <text class="rating-text">{{currentPlace.rating}}</text>
         </view>
       </view>
-      
+
       <view class="card-info">
         <view class="card-header">
-          <text class="card-title">{{currentPlace.name}}</text>
+          <text class="card-title">{{currentPlace ? currentPlace.name : ''}}</text>
         </view>
         <view class="card-tags">
-          <text class="tag" wx:for="{{currentPlace.tags}}" wx:key="*this">{{item}}</text>
+          <text class="tag" wx:for="{{currentPlace ? currentPlace.tags : []}}" wx:key="*this">{{item}}</text>
         </view>
         <view class="card-location">
           <text class="location-icon">📍</text>
-          <text class="location-text">{{currentPlace.address}} · {{currentPlace.distance}}</text>
+          <text class="location-text">{{currentPlace ? currentPlace.address : ''}}{{currentPlace && currentPlace.distance ? ' · ' + currentPlace.distance : ''}}</text>
         </view>
       </view>
     </view>
-    
+
     <button class="navigate-btn" catchtap="onNavigate">
       <text class="nav-icon">🧭</text>
       <text class="nav-text">导航前往</text>
