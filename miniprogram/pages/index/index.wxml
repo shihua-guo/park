@@ -9,10 +9,9 @@
     scale="{{scale}}"
     markers="{{markers}}"
     bindmarkertap="onMarkerTap"
+    bindtap="onMapTap"
     show-location="{{true}}"
   >
-    <!-- 地图上的渐变遮罩 -->
-    <cover-view class="map-overlay"></cover-view>
   </map>
 
   <!-- 顶部搜索栏和标签 -->
