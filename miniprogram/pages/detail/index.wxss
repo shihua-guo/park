@@ -1,0 +1,184 @@
+.page {
+  min-height: 100vh;
+  background: #f7f8fa;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  position: relative;
+  height: 520rpx;
+}
+
+.hero-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  padding: 0 24rpx;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.hero-btn {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  color: #111a2c;
+}
+
+.hero-counter {
+  position: absolute;
+  right: 32rpx;
+  bottom: 32rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 24rpx;
+  background: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  font-size: 24rpx;
+}
+
+.content {
+  flex: 1;
+  padding: 32rpx 36rpx 140rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #111a2c;
+}
+
+button.ghost {
+  font-size: 26rpx;
+  padding: 0 28rpx;
+  border-radius: 999rpx;
+  border: 1px solid #d5dbe6;
+  color: #4c5b71;
+}
+
+.rating-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16rpx;
+}
+
+.rating {
+  font-size: 32rpx;
+  color: #f4a53d;
+}
+
+.reviews {
+  font-size: 26rpx;
+  color: #8b95a7;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.tag {
+  padding: 10rpx 18rpx;
+  border-radius: 16rpx;
+  background: #eef4ff;
+  color: #4c5b71;
+  font-size: 24rpx;
+}
+
+.info-card {
+  background: #ffffff;
+  border-radius: 28rpx;
+  padding: 24rpx 28rpx;
+  box-shadow: 0 12rpx 30rpx rgba(17, 26, 44, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.info-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+  color: #111a2c;
+}
+
+.info-line.subtle {
+  font-size: 24rpx;
+  color: #8b95a7;
+}
+
+.label {
+  font-weight: 500;
+}
+
+.value {
+  flex: 1;
+  text-align: right;
+  margin-left: 24rpx;
+  color: #4c5b71;
+}
+
+.status-chip {
+  align-self: flex-start;
+  padding: 8rpx 20rpx;
+  border-radius: 16rpx;
+  background: #e5f7eb;
+  color: #28a745;
+  font-size: 24rpx;
+}
+
+.link {
+  color: #1677ff;
+  font-size: 26rpx;
+  text-align: right;
+}
+
+.description {
+  font-size: 26rpx;
+  color: #4c5b71;
+  line-height: 1.6;
+}
+
+.bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 40rpx;
+  padding: 0 40rpx;
+}
+
+button.primary {
+  width: 100%;
+  border-radius: 999rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: linear-gradient(90deg, #15c1ff 0%, #1677ff 100%);
+  color: #ffffff;
+  font-size: 30rpx;
+}

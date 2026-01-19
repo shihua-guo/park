@@ -1,0 +1,62 @@
+<view class="page" wx:if="{{location}}">
+  <view class="hero">
+    <swiper class="hero-swiper" current="{{currentImage}}" circular="true" bindchange="onHeroChange">
+      <block wx:for="{{location.coverImages}}" wx:key="url">
+        <swiper-item>
+          <image class="hero-image" src="{{item}}" mode="aspectFill" bindtap="goToGallery" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="hero-controls">
+      <view class="hero-btn" bindtap="handlePrevImage">‹</view>
+      <view class="hero-btn" bindtap="handleNextImage">›</view>
+    </view>
+    <view class="hero-counter">{{currentImage + 1}} / {{location.coverImages.length}}</view>
+  </view>
+
+  <view class="content">
+    <view class="title-row">
+      <text class="title">{{location.name}}</text>
+      <button class="ghost" type="default" open-type="share">分享</button>
+    </view>
+    <view class="rating-row">
+      <text class="rating">★ {{location.rating}}</text>
+      <text class="reviews">{{location.reviewCount}} 条精选评价</text>
+    </view>
+    <view class="tag-row">
+      <text wx:for="{{location.tags}}" wx:key="tag" class="tag">{{tag}}</text>
+    </view>
+
+    <view class="info-card" bindtap="handleOpenMap">
+      <view class="info-line">
+        <text class="label">地址</text>
+        <text class="value">{{location.address}}</text>
+      </view>
+      <view class="info-line subtle">
+        <text>{{location.distance}} · {{location.travelTime}}</text>
+      </view>
+    </view>
+
+    <view class="info-card">
+      <view class="info-line">
+        <text class="label">营业时间</text>
+        <text class="value">{{location.hours}}</text>
+      </view>
+      <view class="status-chip">{{location.status}}</view>
+    </view>
+
+    <view class="info-card" bindtap="handleCall">
+      <view class="info-line">
+        <text class="label">电话</text>
+        <text class="value">{{location.phone}}</text>
+      </view>
+      <text class="link">拨打</text>
+    </view>
+
+    <view class="description">{{location.description}}</view>
+  </view>
+
+  <view class="bottom-bar">
+    <button class="primary" type="default" bindtap="handleNavigate">导航前往</button>
+  </view>
+</view>
