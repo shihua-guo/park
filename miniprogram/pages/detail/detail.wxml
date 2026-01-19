@@ -7,6 +7,7 @@
       indicator-dots="{{false}}"
       circular="{{true}}"
       autoplay="{{false}}"
+      current="{{currentImageIndex}}"
       bindchange="onSwiperChange"
       bindtap="onImageTap"
     >
