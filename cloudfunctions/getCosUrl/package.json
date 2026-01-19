@@ -1,0 +1,10 @@
+{
+  "name": "getCosUrl",
+  "version": "1.0.0",
+  "description": "生成腾讯云COS临时访问URL",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3",
+    "cos-nodejs-sdk-v5": "^2.12.3"
+  }
+}

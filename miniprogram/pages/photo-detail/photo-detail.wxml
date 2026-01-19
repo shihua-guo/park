@@ -8,8 +8,18 @@
     <text class="icon">✕</text>
   </view>
 
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-container">
+    <view class="loading-text">加载中...</view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:elif="{{!loading && images.length === 0}}" class="empty-container">
+    <text class="empty-text">暂无图片</text>
+  </view>
+
   <!-- 全屏图片展示 -->
-  <view class="photo-container">
+  <view wx:else class="photo-container">
     <!-- 背景渐变 -->
     <view class="background-gradient"></view>
     
@@ -18,7 +28,7 @@
       class="photo-swiper" 
       current="{{currentIndex}}"
       bindchange="onSwiperChange"
-      circular="{{true}}"
+      circular="{{images.length > 1}}"
       indicator-dots="{{false}}"
     >
       <swiper-item wx:for="{{images}}" wx:key="*this">
@@ -37,6 +47,11 @@
     <!-- 图片计数器 -->
     <view class="counter">
       <text>{{currentIndex + 1}} / {{images.length}}</text>
+    </view>
+
+    <!-- 保存按钮 -->
+    <view class="save-btn" bindtap="onSaveImage">
+      <text class="save-icon">⬇</text>
     </view>
   </view>
 </view>

@@ -1,49 +1,185 @@
 // detail.js
 Page({
   data: {
-    placeInfo: {
-      id: 1,
-      name: '欢乐海岸室内乐园',
-      rating: 4.8,
-      reviewCount: '1,203',
-      tags: [
-        { icon: '❄️', text: '室内空调' },
-        { icon: '👶', text: '适合 2-6岁' },
-        { icon: '🍽️', text: '亲子餐厅' }
-      ],
-      address: '南山区滨海大道2008号欢乐海岸购物中心 L2-035',
-      distance: '1.2km',
-      driveTime: '5分钟',
-      status: '营业中',
-      hours: '10:00 - 22:00',
-      hoursNote: '周末及节假日照常开放',
-      phone: '0755-8888 6666',
-      description: '这是一个专为学龄前儿童打造的梦幻乐园，整体设计采用柔和的马卡龙色系，视觉舒适，保护宝宝视力。乐园内设有超大的海洋球池、全软包攀爬架、原木沙池以及模拟超市厨房等角色扮演区域。\n\n此外，乐园还配备了专业的亲子餐厅和母婴室，设施齐全，非常适合周末遛娃。所有游乐设施每天定时消毒，确保孩子们玩得开心又安心。',
-      facilities: [
-        { icon: '📶', name: 'WIFI' },
-        { icon: '🅿️', name: '停车场' },
-        { icon: '👶', name: '母婴室' },
-        { icon: '🍽️', name: '餐厅' }
-      ]
-    },
-    images: [
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDM-5cMKDvgQILvtAwmlzVtZ_BX3zyzirJFn_6mN0swZFjD8gSzoyvKDAEWRI8Lv497jDVD-u2qHen1XP0jabWOgyZs_G3-pJ_rNBb4I3KZS0C1ihqKokSRx1B4goBRqRIEeVoAnG3VOVYXg8WX1rA3Ic3a3tcsYc6CaWdhDEsJ3Ugg1q_o5Q6XH-YPVgMTJxHyfzWud2bsighX9IL65z_D_j6_lyAJp5oVUnO7RMQj8ucIZpJkqCE6S5VtOLWvQQFLkiG1CCUmOc8s',
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBvyAo1BW9Sh9SnDEbjaZw5_70hU_Y58Bgs6ArB0FmL6dBXclIrxrCLPQgqWsOd04_mmqTKP4lsL6oDrmL4iEy-NWG99rnZXuscGF45_m_fwdc1wxpKn6QaXwAJzG-nhon4Wl-4XXNJvhjgNYP-mOB_OVFtto18e_-9k23ymW2F_gGNjf2wYzctDAYbU1X7u-lKS88W1GaDjYGzGWtCPSi2cnOi3crBuwQ3X0O6vOPLrljG2MAPlZcdg61mn-4PA_lnsHzDfHgoSyvS',
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDEsneW5lmQRucNcO8vFBjWTB-83d-haf-KchYxCQ7e9KV1UxPRkoqfjen9-8jsnM6vZmcuI405I5pmvb4HvR8hmS9SFc5roIVtaItJ1G6DaQKWyRiChZX44B2FZFL93t_nrFEPOQ78sA4cSTzitYwbCVG8KRc8_QIQF7oBMLIaeItBnS8opX_JB8gh56HX-yM-lWLyPe6yDleC8w_UHS5Fgij2z0GjoZtFa2sURuflWJ4zGmyjjayx_cMh6dET-SpyNDE5ZWSebykO',
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCdjvisCLZb9hNd5e9XBvlXhK2YnoO6-_TOkcV5CPDOoOBVD4Vo4KjGASmXFVKAUwPtk7pACGJ-psRtGdGRif4LD9VG5pTP25iHSPrj8ZayfkzoslA_5U7aps0CQsWjA7O6BukaStqmWo23NbFOctvGJUeHzqwiI-3JcNAyB7kXcuveJaAqJBkAj1r0AcSmXxGEYo8gH0Naj3oAp-TwWukbIm9wDGxGM3kav0Z1ur-lSq_oM9K7elLCUh1PLX9un_wv4Oskw0Jv89fp',
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDAzjKI8O5v3AU1DEhrPzCHIbuSswIfmRlOc6hSDIcd3Fru0VY0l1rgxgePoUyZcP8pIMgkmX819Vull5UkMRWIXgTI446llVApxZae6AcaItxK79Ec7lVGgSyIV5siX8a3KYVCYDEPsjjBGqIDeMNX2ACVV5_bcQouMYqKV7Vj4TKS4GC7m-8MpdONKqNrGvF6pwy_XCd4npNQ9bP06HCrJRb5ZS6MnO6Cj9rz2ocdZ3fdR8UOCTmx1ZM9Tqhe663qMf1lCTN8GynT',
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuA5-7rkLZvdDWBFO60jbtoN19BMY6zbi7AZYk0uVi4t__HB4e3ATP7veU_bzX5qi5XkayUusLEFoKWXaawKla87MtjdX1SyAOGQrVzuVotvvPLNad6U4gQ99hNwGKSuumVt7ZP4ScVHu7y7OTpenyy4B4VDQ2f5TzOGyWgRgEsKUINg2-4qxIawcFhnhu_XgS9ZhiHksJVamhkEfK_Bx0TFWTyqBu3KjU3X9Pu7Lnu-zzoiw518rgLTXkMjhUWOfsBY5OPWlyW9dy4W',
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBOD5w4qzUXlaD2wai4DyWqa9u4MXP_2XC1qWopjygjtF-u6ZGIHr4jrshjUhVXwFddYcNqfrAeQu-Gw5TOWLnXVN7dC8xK4-WqnXrTza0NeUVIsZGUUxgfdQxaOy3VS20mBA9hs8oV543VCHkCbzuti0-qy4HcCXS0lIo6TdYBzXPLnD0k4XTLEC5Ax-3jp4pZBSQQzxQGPM_uHPbfKzF8u6khd2BuR07URyG_UTUOqk8qvNJyniIWUOgJ4Mg5uDeqTGxjXHoCjF2y',
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBh7ulaexdzoDjSjL7vwMjeyh5c-BBC_H_c6wZu6BfWyIuNL8HZWiH3zsiwUT6TK2zAHZdtOZw7F9R_ZB2BMdbNFtKQI5H_5yZ1GxgItDr8YOkYRKuiEkA8sWBdxxFxLJ_ADk2iheNmjAHt_zK1ViOuEsoD8Zs7ckyH57wdnG-SeKgk_8VmwsalYLt60631b7acL0utHMv_Z_7UvgQTHnZYmPJbYwrvHJ7hlog3BVkZf-UhE6U8yU_CcmezsVOFfjBlcHnEng1wNANx'
-    ],
+    placeInfo: null,
+    images: [],
     currentImageIndex: 0,
-    isFavorite: false
+    isFavorite: false,
+    loading: true
   },
 
-  onLoad(options) {
+  async onLoad(options) {
     const id = options.id
+    if (!id) {
+      wx.showToast({ title: '缺少公园ID', icon: 'none' })
+      return
+    }
+    
     // 根据id加载地点详情
     console.log('加载地点详情:', id)
+    await this.loadParkDetail(id)
+  },
+
+  // 从数据库加载公园详情
+  async loadParkDetail(parkId) {
+    wx.showLoading({ title: '加载中...' })
+
+    try {
+      const db = wx.cloud.database()
+      const res = await db.collection('park_20260119').doc(parkId).get()
+      const park = res.data
+      
+      if (!park) {
+        wx.showToast({ title: '未找到公园信息', icon: 'none' })
+        return
+      }
+
+      console.log('公园详情数据:', park)
+
+      // 获取所有图片的临时URL
+      const allImages = [park.coverImg, ...(park.imgs || [])].filter(Boolean)
+      let tempImages = []
+      
+      if (allImages.length > 0) {
+        try {
+          const urlRes = await wx.cloud.callFunction({
+            name: 'getCosUrl',
+            data: { urls: allImages, expired: 7200 }
+          })
+          
+          if (urlRes.result && urlRes.result.success) {
+            tempImages = urlRes.result.urls
+          } else {
+            // 如果转换失败，使用原图片
+            console.warn('转换URL失败，使用原始URL')
+            tempImages = allImages
+          }
+        } catch (err) {
+          console.warn('获取图片临时URL失败，使用原URL:', err)
+          tempImages = allImages
+        }
+      }
+
+      // 处理标签
+      const tags = park.tags ? park.tags.split(',').map(tag => ({
+        icon: this.getTagIcon(tag),
+        text: tag
+      })) : []
+
+      // 构建显示数据
+      const placeInfo = {
+        id: parkId,
+        name: park.name || '未知公园',
+        rating: park.rating || 0,
+        reviewCount: park.reviewCount || '0',
+        tags: tags,
+        address: park.address || '',
+        distance: '',
+        driveTime: '',
+        status: park.isOpen === '1' ? '开放中' : '暂停开放',
+        hours: park.openTime || '未知',
+        hoursNote: '',
+        phone: park.phone || '',
+        description: this.generateDescription(park),
+        facilities: this.parseFacilities(park),
+        latitude: park.latitude,
+        longitude: park.longitude,
+        type: park.type || '',
+        hectare: park.hectare || '',
+        managementunit: park.managementunit || '',
+        department: park.department || '',
+        url: park.url || ''
+      }
+
+      this.setData({
+        placeInfo,
+        images: tempImages,
+        loading: false
+      })
+    } catch (err) {
+      console.error('加载公园详情失败:', err)
+      wx.showToast({ title: '加载失败', icon: 'none' })
+    } finally {
+      wx.hideLoading()
+    }
+  },
+
+  // 根据标签获取图标
+  getTagIcon(tag) {
+    const iconMap = {
+      '帐篷区': '⛺',
+      '滨海休闲': '🌊',
+      '儿童游乐': '🎠',
+      '运动健身': '⚽',
+      '观景': '🌄',
+      '休闲': '☕',
+      '文化': '📚',
+      '自然': '🌿'
+    }
+    
+    // 模糊匹配
+    for (const key in iconMap) {
+      if (tag.includes(key)) {
+        return iconMap[key]
+      }
+    }
+    return '🏞️'
+  },
+
+  // 生成描述文本
+  generateDescription(park) {
+    let desc = `${park.name}是一个${park.type || '公园'}`
+    
+    if (park.hectare) {
+      desc += `，占地面积约${parseFloat(park.hectare).toFixed(2)}公顷`
+    }
+    
+    if (park.managementunit) {
+      desc += `。由${park.managementunit}负责管理`
+    }
+    
+    if (park.tags) {
+      desc += `，特色包括：${park.tags}`
+    }
+    
+    if (park.openTime) {
+      desc += `。开放时间：${park.openTime}`
+    }
+    
+    return desc + '。'
+  },
+
+  // 解析设施信息
+  parseFacilities(park) {
+    const facilities = []
+    
+    // 根据标签推断设施
+    if (park.tags) {
+      const tags = park.tags.toLowerCase()
+      
+      if (tags.includes('停车') || tags.includes('parking')) {
+        facilities.push({ icon: '🅿️', name: '停车场' })
+      }
+      if (tags.includes('wifi') || tags.includes('网络')) {
+        facilities.push({ icon: '📶', name: 'WIFI' })
+      }
+      if (tags.includes('母婴') || tags.includes('儿童')) {
+        facilities.push({ icon: '👶', name: '母婴室' })
+      }
+      if (tags.includes('餐厅') || tags.includes('饮食')) {
+        facilities.push({ icon: '🍽️', name: '餐厅' })
+      }
+      if (tags.includes('卫生间') || tags.includes('洗手间')) {
+        facilities.push({ icon: '🚻', name: '卫生间' })
+      }
+    }
+    
+    // 默认设施
+    if (facilities.length === 0) {
+      facilities.push({ icon: '🚻', name: '卫生间' })
+    }
+    
+    return facilities
   },
 
   // 轮播图切换
@@ -103,9 +239,11 @@ Page({
   // 点击地址
   onAddressTap() {
     const info = this.data.placeInfo
+    if (!info) return
+    
     wx.openLocation({
-      latitude: 22.543099,
-      longitude: 114.057868,
+      latitude: info.latitude || 22.543099,
+      longitude: info.longitude || 114.057868,
       name: info.name,
       address: info.address,
       scale: 18
@@ -114,8 +252,14 @@ Page({
 
   // 拨打电话
   onCallTap() {
+    const phone = this.data.placeInfo?.phone
+    if (!phone) {
+      wx.showToast({ title: '暂无联系电话', icon: 'none' })
+      return
+    }
+    
     wx.makePhoneCall({
-      phoneNumber: this.data.placeInfo.phone
+      phoneNumber: phone
     })
   },
 
@@ -149,9 +293,11 @@ Page({
   // 导航
   onNavigate() {
     const info = this.data.placeInfo
+    if (!info) return
+    
     wx.openLocation({
-      latitude: 22.543099,
-      longitude: 114.057868,
+      latitude: info.latitude || 22.543099,
+      longitude: info.longitude || 114.057868,
       name: info.name,
       address: info.address,
       scale: 18
@@ -160,10 +306,13 @@ Page({
 
   // 分享到好友
   onShareAppMessage() {
+    const placeInfo = this.data.placeInfo
+    const images = this.data.images
+    
     return {
-      title: this.data.placeInfo.name,
-      path: `/pages/detail/detail?id=${this.data.placeInfo.id}`,
-      imageUrl: this.data.images[0]
+      title: placeInfo?.name || '公园推荐',
+      path: `/pages/detail/detail?id=${placeInfo?.id}`,
+      imageUrl: images.length > 0 ? images[0] : ''
     }
   }
 })

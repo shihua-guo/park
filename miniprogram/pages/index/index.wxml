@@ -10,6 +10,7 @@
     markers="{{markers}}"
     bindmarkertap="onMarkerTap"
     bindtap="onMapTap"
+    bindregionchange="onRegionChange"
     show-location="{{true}}"
   >
   </map>
