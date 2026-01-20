@@ -34,6 +34,12 @@ Page({
     currentRegion: null
   },
 
+  // 本地缓存：已加载的公园数据（用于优化性能）
+  parkCache: new Map(), // key: parkId, value: park data
+  
+  // 防抖定时器
+  loadDataTimer: null,
+
   onLoad(options) {
     console.log('页面加载开始...')
     
@@ -47,7 +53,7 @@ Page({
     console.log('等待地图加载完成...')
   },
 
-  // 加载公园数据（根据地图范围）- 支持分页查询
+  // 加载公园数据（根据地图范围）- 优化版：本地缓存+增量加载
   async loadParkData(region) {
     // 如果没有提供区域信息，不进行查询
     if (!region || !region.northeast || !region.southwest) {
@@ -55,10 +61,8 @@ Page({
       return
     }
 
-    wx.showLoading({ title: '加载中...' })
-
     try {
-      console.log('开始从数据库读取parks集合...')
+      console.log('开始加载公园数据...')
       
       const db = wx.cloud.database()
       const _ = db.command
@@ -71,28 +75,53 @@ Page({
         southwest: { lat: southwest.latitude, lng: southwest.longitude }
       })
       
-      // 构建范围查询条件：经纬度在西南角和东北角之间
+      // 第一步：从本地缓存中筛选出在可视范围内的公园
+      const cachedParks = []
+      const cachedIds = []
+      
+      this.parkCache.forEach((park, parkId) => {
+        // 检查公园是否在当前可视范围内
+        if (
+          park.latitude >= southwest.latitude &&
+          park.latitude <= northeast.latitude &&
+          park.longitude >= southwest.longitude &&
+          park.longitude <= northeast.longitude
+        ) {
+          cachedParks.push(park)
+          cachedIds.push(parkId)
+        }
+      })
+      
+      console.log(`从缓存中找到 ${cachedParks.length} 个在可视范围内的公园`)
+      
+      // 第二步：查询数据库中不在缓存里的新数据
+      // 构建范围查询条件：经纬度在西南角和东北角之间，且不在已缓存的ID列表中
       const whereCondition = {
         latitude: _.and(
-          _.gte(southwest.latitude),   // 大于等于西南角纬度
-          _.lte(northeast.latitude)     // 小于等于东北角纬度
+          _.gte(southwest.latitude),
+          _.lte(northeast.latitude)
         ),
         longitude: _.and(
-          _.gte(southwest.longitude),   // 大于等于西南角经度
-          _.lte(northeast.longitude)    // 小于等于东北角经度
+          _.gte(southwest.longitude),
+          _.lte(northeast.longitude)
         )
       }
       
-      // 分页查询所有数据
-      const PAGE_SIZE = 20  // 每页20条
-      let allParks = []
+      // 如果有缓存的ID，排除这些ID
+      if (cachedIds.length > 0) {
+        whereCondition._id = _.nin(cachedIds)
+      }
+      
+      // 分页查询新数据
+      const PAGE_SIZE = 20
+      let newParks = []
       let hasMore = true
       let page = 0
       
+      wx.showLoading({ title: '加载中...' })
+      
       while (hasMore) {
         const skip = page * PAGE_SIZE
-        
-        console.log(`正在查询第 ${page + 1} 页，跳过 ${skip} 条...`)
         
         const dbRes = await db.collection('park_20260119')
           .where(whereCondition)
@@ -100,37 +129,31 @@ Page({
           .limit(PAGE_SIZE)
           .get()
         
-        console.log(`第 ${page + 1} 页查询结果：${dbRes.data.length} 条`)
-        
         if (dbRes.data.length > 0) {
-          allParks = allParks.concat(dbRes.data)
+          newParks = newParks.concat(dbRes.data)
+          
+          // 将新数据加入缓存
+          dbRes.data.forEach(park => {
+            this.parkCache.set(park._id, park)
+          })
+          
           page++
           
-          // 如果返回数据少于PAGE_SIZE，说明已经是最后一页
           if (dbRes.data.length < PAGE_SIZE) {
             hasMore = false
           }
         } else {
-          // 没有更多数据了
           hasMore = false
         }
       }
       
-      console.log('数据库读取成功！')
-      console.log('总数据条数:', allParks.length)
-      console.log('总共查询了', page, '页')
+      console.log(`从数据库查询到 ${newParks.length} 个新公园`)
+      console.log(`缓存总数: ${this.parkCache.size} 个公园`)
       
-      // 打印每个公园的信息（如果数据太多，可以注释掉）
-      if (allParks.length <= 50) {
-        allParks.forEach((park, index) => {
-          console.log(`公园${index + 1}:`, park)
-        })
-      } else {
-        console.log('数据较多，不逐条打印。前5条示例:')
-        allParks.slice(0, 5).forEach((park, index) => {
-          console.log(`公园${index + 1}:`, park)
-        })
-      }
+      // 合并缓存数据和新数据
+      const allParks = [...cachedParks, ...newParks]
+      
+      console.log(`最终显示 ${allParks.length} 个公园标记`)
       
       // 处理并设置markers数据
       await this.processParkData(allParks)
@@ -235,34 +258,42 @@ Page({
     }, 500) // 延迟500ms确保地图完全加载
   },
 
-  // 地图区域变化事件
+  // 地图区域变化事件 - 优化版：防抖处理
   onRegionChange(e) {
     // 只处理拖动或缩放结束的事件
     if (e.type === 'end' && e.causedBy) {
       console.log('地图区域变化:', e)
       
-      // 获取当前地图的可视区域边界
-      this.mapCtx.getRegion({
-        success: (res) => {
-          console.log('当前地图区域:', res)
-          
-          if (res.northeast && res.southwest) {
-            // 使用实际的地图边界查询
-            const region = {
-              northeast: res.northeast,
-              southwest: res.southwest
-            }
+      // 清除之前的定时器（防抖）
+      if (this.loadDataTimer) {
+        clearTimeout(this.loadDataTimer)
+      }
+      
+      // 延迟400ms后再加载数据，避免频繁触发
+      this.loadDataTimer = setTimeout(() => {
+        // 获取当前地图的可视区域边界
+        this.mapCtx.getRegion({
+          success: (res) => {
+            console.log('当前地图区域:', res)
             
-            this.setData({ currentRegion: region })
-            this.loadParkData(region)
-          } else {
-            console.warn('地图区域数据格式异常:', res)
+            if (res.northeast && res.southwest) {
+              // 使用实际的地图边界查询
+              const region = {
+                northeast: res.northeast,
+                southwest: res.southwest
+              }
+              
+              this.setData({ currentRegion: region })
+              this.loadParkData(region)
+            } else {
+              console.warn('地图区域数据格式异常:', res)
+            }
+          },
+          fail: (err) => {
+            console.warn('获取地图区域失败:', err)
           }
-        },
-        fail: (err) => {
-          console.warn('获取地图区域失败:', err)
-        }
-      })
+        })
+      }, 400) // 400ms防抖延迟
     }
   },
 
